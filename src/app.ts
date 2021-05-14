@@ -23,6 +23,9 @@ class App {
         this.port = process.env.PORT || 3000;
         this.env = process.env.NODE_ENV || 'development';
 
+        this.initializeMiddlewares();
+        this.initializeRoutes(routes);
+        this.initializeErrorHandling();
     }
 
     public listen() {
@@ -56,8 +59,8 @@ class App {
     }
 
     private initializeRoutes(routes: Routes[]) {
-        routes.forEach(routes => {
-           this.app.use('/', routes.router);
+        routes.forEach(route => {
+            this.app.use('/', route.router);
         });
     }
 
